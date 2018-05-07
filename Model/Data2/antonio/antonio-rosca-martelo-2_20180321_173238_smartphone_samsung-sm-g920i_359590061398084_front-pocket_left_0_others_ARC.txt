@@ -1,0 +1,8 @@
+1521664358452;-19.86981468361593;-43.96470247982383;unknown:31,still:22,walking:11,vehicle:11,foot:11,bicycle:8,running:8,tilting:0;0
+1521664362116;-19.86981468361593;-43.96470247982383;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664378631;-19.869744103697798;-43.964778073390995;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664379642;-19.869710777695797;-43.964775420003505;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664380639;-19.869731991275145;-43.96472165235576;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664381634;-19.869702287841335;-43.96471908340716;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664382637;-19.86964854114261;-43.96466067735191;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0
+1521664383635;-19.869558649612088;-43.96459837925946;unknown:31,still:21,vehicle:13,walking:10,foot:10,bicycle:8,running:8,tilting:0;0

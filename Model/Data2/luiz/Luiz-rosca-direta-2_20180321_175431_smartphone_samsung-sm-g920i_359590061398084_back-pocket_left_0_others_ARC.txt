@@ -1,0 +1,2 @@
+1521665671524;-19.86924958754341;-43.96420065452574;still:30,walking:28,foot:28,vehicle:21,bicycle:5,unknown:2,running:1,tilting:0;0
+1521665688884;-19.86924958754341;-43.96420065452574;unknown:40,walking:10,bicycle:10,vehicle:10,foot:10,running:10,still:10,tilting:0;0

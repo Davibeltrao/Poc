@@ -1,0 +1,9 @@
+1516560463632;0.0;0.0;unknown:40,walking:10,bicycle:10,vehicle:10,foot:10,running:10,still:10,tilting:0;0
+1516560493313;0.0;0.0;tilting:100,walking:0,bicycle:0,vehicle:0,foot:0,unknown:0,running:0,still:0;0
+1516560493355;0.0;0.0;still:47,vehicle:26,walking:17,foot:17,bicycle:6,unknown:3,running:0,tilting:0;0
+1516560497719;0.0;0.0;still:52,walking:23,foot:23,bicycle:12,vehicle:4,unknown:4,running:1,tilting:0;0
+1516560501606;0.0;0.0;still:47,walking:26,foot:26,bicycle:10,vehicle:8,unknown:3,running:1,tilting:0;0
+1516560505992;0.0;0.0;still:57,walking:21,foot:21,bicycle:10,vehicle:6,unknown:2,running:1,tilting:0;0
+1516560510453;0.0;0.0;still:62,walking:18,foot:18,bicycle:8,vehicle:5,unknown:3,running:1,tilting:0;0
+1516560514909;0.0;0.0;still:89,vehicle:7,unknown:3,walking:1,foot:1,bicycle:0,running:0,tilting:0;0
+1516560519303;0.0;0.0;still:34,vehicle:31,bicycle:14,walking:10,foot:10,unknown:2,running:0,tilting:0;0

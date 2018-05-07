@@ -1,0 +1,1 @@
+1516563828011;0.0;0.0;still:64,walking:12,foot:12,vehicle:11,unknown:5,bicycle:4,running:0,tilting:0;0
