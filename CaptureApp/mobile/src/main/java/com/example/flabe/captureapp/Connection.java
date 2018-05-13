@@ -65,21 +65,20 @@ public class Connection extends Activity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connections);
-        s = s.getInstance();
-        mUuids = s.getUUIDs();
 
+        findViewByIds();
+
+        s = s.getInstance();
+        c = new Connections();
         Intent intent = getIntent();
 
-        type = intent.getStringExtra(MainActivity.SERVER_TYPE);
+        mUuids = s.getUUIDs();
 
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         s.setBtAdapter(myBluetoothAdapter);
 
-        findViewByIds();
-
+        type = intent.getStringExtra(MainActivity.SERVER_TYPE);
         textView.setText(type);
-
-        c = new Connections();
 
         implementListeners();
     }

@@ -2,21 +2,31 @@ package com.example.flabe.captureapp;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.telephony.SmsMessage;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.capture.Communication;
 import com.example.capture.Communication.SendReceive;
+import com.example.capture.Sensor.FileWriter.InternalFileWriter;
+import com.example.capture.Sensor.SensorActivity;
 import com.example.capture.Singleton;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by flabe on 9/5/2018.
@@ -25,17 +35,23 @@ import java.util.ArrayList;
 public class Comm extends Activity {
     Singleton s;
     Communication c;
+    SensorData sensorData;
+    InternalFileWriter InternalWriter;
 
     int teste = 0;
     int msg_send = 0;
+    int n = 0;
 
     static final int STATE_LISTENING = 1;
     static final int STATE_CONNECTING = 2;
     static final int STATE_CONNECTED = 3;
     static final int STATE_CONNECTION_FAILED = 4;
     static final int STATE_MESSAGE_RECEIVED = 5;
+    static final int START = 13;
+    static final int STOP = 14;
 
     String type = "";
+    String button_type = "Start";
 
     Button send;
     TextView msg_box;
@@ -52,8 +68,9 @@ public class Comm extends Activity {
 
         findViewByIds();
 
-        s = s.getInstance();
-        c = new Communication();
+        createObjects();
+
+        //sensorData.registerListeners();
 
         Intent intent = getIntent();
         type = intent.getStringExtra("SERVER_TYPE");
@@ -63,6 +80,13 @@ public class Comm extends Activity {
         connectSockets();
 
         implementListeners();
+    }
+
+    private void createObjects(){
+        s = s.getInstance();
+        c = new Communication();
+        sensorData = new SensorData(this);
+        InternalWriter = new InternalFileWriter("SensorFile.txt", this);
     }
 
     private void findViewByIds() {
@@ -85,19 +109,57 @@ public class Comm extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String string= "Value: " + Integer.toString(msg_send);
-                msg_send++;
-                if (type.equals("Master")) {
-                    //SEND MESSAGE TO ALL SLAVES
-                    for(int i = 0; i < messageThreads.size(); i++) {
-                        messageThreads.get(i).write(string.getBytes());
+                if(button_type.equals("Start")){
+                    handleMessage(STOP);
+                    new CountDownTimer(6000, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            msg_box.setText("" + millisUntilFinished / 1000);
+                            long t = millisUntilFinished/1000;
+                            String timer = String.valueOf(t);
+                            //here you can have your logic to set text to edittext
+                            reSendMessage(timer);
+                        }
+                        public void onFinish() {
+                            reSendMessage("START");
+                            if(type.equals("Master")){
+                                startCollectingData();
+                            }
+                        }
+                    }.start();
+                }
+                if (button_type.equals("Stop")){
+                    if(type.equals("Master")){
+                        stopCollectingData();
                     }
-                } else {
-                    //SEND MESSAGE TO MASTER
-                    messageThreads.get(0).write(string.getBytes());
+                    reSendMessage("STOP");
                 }
             }
         });
+    }
+
+    public void startCollectingData(){
+        handleMessage(STOP);
+        sensorData.registerListeners();
+        InternalWriter.openOutput();
+    }
+
+    public void stopCollectingData(){
+        handleMessage(START);
+        sensorData.unregisterListeners();
+        InternalWriter.readFile();
+        InternalWriter.closeOutput();
+    }
+
+    public void reSendMessage(String message){
+        if (type.equals("Master")) {
+            //SEND MESSAGE TO ALL SLAVES
+            for(int i = 0; i < messageThreads.size(); i++) {
+                messageThreads.get(i).write(message.getBytes());
+            }
+        } else {
+            //SEND MESSAGE TO MASTER
+            messageThreads.get(0).write(message.getBytes());
+        }
     }
 
     public void handleMessage(int STATE){
@@ -128,6 +190,23 @@ public class Comm extends Activity {
                     Long tsLong = System.currentTimeMillis();
                     String ts = tsLong.toString();
                     msg_box.setText(tempMsg);
+                    if(type.equals("Master")){
+                        if(tempMsg.equals("START")){
+                            startCollectingData();
+                        }
+                        if(tempMsg.equals("STOP")){
+                            stopCollectingData();
+                        }
+                        reSendMessage(tempMsg);
+                    }
+                    else{
+                        if(tempMsg.equals("START")){
+                            startCollectingData();
+                        }
+                        if(tempMsg.equals("STOP")){
+                            stopCollectingData();
+                        }
+                    }
                     textView.setText("message received");
                     break;
                 case 10:
@@ -137,10 +216,19 @@ public class Comm extends Activity {
                 case 11:
                     break;
                 case 12:
+                    msg_box.setText(Integer.toString(n));
+                    n++;
                     textView.setText("SUCESSO");
                     break;
-                case 13:
-                    textView.setText("FRACASSO");
+                case START:
+                    button_type = "Start";
+                    send.setText("START");
+                    textView.setText(button_type);
+                    break;
+                case STOP:
+                    button_type = "Stop";
+                    send.setText("Stop");
+                    textView.setText(button_type);
                     break;
             }
             return true;
@@ -173,6 +261,27 @@ public class Comm extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    private class SensorData extends SensorActivity{
+
+        public SensorData(Context c) {
+            super(c);
+        }
+
+        public void getAccelerometer(SensorEvent event){
+            float[] values = event.values;
+            x = values[0];
+            y = values[1];
+            z = values[2];
+            time = event.timestamp;
+            new Thread(new Runnable() {
+                public void run(){
+                    InternalWriter.writeToFile(Float.toString(x), Float.toString(y), Float.toString(z), String.valueOf(time));
+                }
+            }).start();
         }
     }
 }
