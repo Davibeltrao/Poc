@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <CheckBox
+        android:id="@+id/gyr"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginStart="34dp"
+        android:text="Gyr"
+        app:layout_constraintBottom_toTopOf="@+id/Lacc"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Acc" />
+
+    <CheckBox
+        android:id="@+id/Mag"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="14dp"
+        android:text="Mag"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Lacc" />
+
+    <CheckBox
+        android:id="@+id/Lacc"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginStart="34dp"
+        android:text="Lacc"
+        app:layout_constraintBottom_toTopOf="@+id/Mag"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gyr" />
+
+    <CheckBox
+        android:id="@+id/Bar"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="13dp"
+        android:text="Bar"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mag" />
+
+    <CheckBox
+        android:id="@+id/gps"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="7dp"
+        android:text="GPS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bar"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <CheckBox
+        android:id="@+id/Acc"
+        android:layout_width="116dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="35dp"
+        android:text="Acc"
+        app:layout_constraintBottom_toTopOf="@+id/gyr"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <SeekBar
+        android:id="@+id/seekBar3"
+        android:layout_width="155dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar4" />
+
+    <SeekBar
+        android:id="@+id/seekBar9"
+        android:layout_width="155dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar3" />
+
+    <SeekBar
+        android:id="@+id/seekBar8"
+        android:layout_width="155dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar9" />
+
+    <SeekBar
+        android:id="@+id/seekBar7"
+        android:layout_width="155dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar8" />
+
+    <SeekBar
+        android:id="@+id/seekBar6"
+        android:layout_width="155dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <SeekBar
+        android:id="@+id/seekBar4"
+        android:layout_width="155dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/save_config"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="95dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gps" />
+
+</android.support.constraint.ConstraintLayout>
